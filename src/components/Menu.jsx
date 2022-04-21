@@ -4,12 +4,14 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import './Menu.css'
 
 const Menu = () => {
-    // const [movieContent, setMovieContent] = useState({
-    //     title: '',
-    //     content: ''
-    // })
+    const [movieContent, setMovieContent] = useState({
+        title: '',
+        content: ''
+    })
+
+    const [viewContent, setViewContent] = useState([]);
     
-      const getValue = e => {
+    const getValue = e => {
         const { name, value } = e.target;
         console.log(name, value);
     };
@@ -42,6 +44,10 @@ const Menu = () => {
             onChange={ ( event, editor ) => {
                 const data = editor.getData();
                 console.log( { event, editor, data } );
+                setMovieContent({
+                    ...movieContent,
+                    content: data
+                })
             } }
             onBlur={ ( event, editor ) => {
                 console.log( 'Blur.', editor );
