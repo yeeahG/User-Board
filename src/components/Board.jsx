@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import './Menu.css'
+import './Board.css'
 
-const Menu = () => {
+const Board = () => {
     const [movieContent, setMovieContent] = useState({
         title: '',
         content: ''
@@ -14,14 +14,25 @@ const Menu = () => {
     const getValue = e => {
         const { name, value } = e.target;
         console.log(name, value);
+        setMovieContent({
+            ...movieContent,
+            [name]: value
+          })
+        console.log(movieContent);
     };
     
 
   return (
     <div className="App">
         <h1>Movie Review</h1>
-        <div className='movie-container'>
-
+        <div className='list-container'>
+            {viewContent.map(element => 
+                <div>
+                    <h2>{element.title}</h2>
+                    <div>{element.content}</div>
+                </div>
+                    
+            )}
         </div>
         <div className="form-wrapper">
             <input 
@@ -57,11 +68,16 @@ const Menu = () => {
             } }
         />
 
-        <button className="submit-button" >
+        <button 
+            className="submit-button" 
+            onClick={() => {
+                setViewContent(viewContent.concat({...movieContent}));
+            }}
+        >
             입력
         </button>
     </div>
   )
 }
 
-export default Menu;
+export default Board;
